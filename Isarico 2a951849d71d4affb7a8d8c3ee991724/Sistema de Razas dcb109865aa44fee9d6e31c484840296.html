@@ -1,0 +1,658 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Sistema de Razas </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dcb10986-5aa4-4fee-9d6e-31c484840296" class="page sans"><header><h1 class="page-title">Sistema de Razas </h1></header><div class="page-body"><p id="a7456f31-acb3-496e-86e9-65dcd353b964" class="">Reglas:</p><p id="7d5e5a4d-796a-4498-883a-8006367b5825" class="">Los jugadores podrán acceder al cambio de razas</p><p id="4f494038-132a-48d4-b872-c4405c917f18" class="">Cada raza tendrá sus propias habilidad</p><p id="4a5ee140-02e3-4211-aa25-53c38ef316d3" class="">Podrán existir personajes con razas híbridas</p><p id="4a7a8dfb-9537-4384-801c-3c6e7273b8c3" class="">Algunos objetos solo podrán ser usados por razas especificas</p><p id="58f501bc-d52b-45f1-a1c9-0bd97c79be54" class="">Atacar una raza del mismo bando tendrá penalizaciones</p><p id="9b9549cb-3c6e-4891-9697-7178d78947c1" class="">
+</p><p id="566e7993-64a6-4a17-9839-37ca038be87c" class="">Cada raza tendrá las siguientes cualidades:</p><div id="a723d53a-4f7c-4512-9aee-0e92655becac" class="column-list"><div id="f0186d2b-1f79-4dda-9ade-2fa6a9182e6e" style="width:50%" class="column"><h3 id="78627d5c-8b1f-48ea-be09-af770dbcc1e0" class="">Bando Alianza:</h3><ul id="f2b23b04-73b0-4615-ae96-5356c1306ea7" class="toggle"><li><details close=""><summary>Humanos 1</summary><ul id="9e72c452-6908-4550-bded-d731179c30a4" class="bulleted-list"><li style="list-style-type:disc">Domesticacion</li></ul><ul id="9ac57c49-cf4f-4b8e-b219-4c0cd238c9f0" class="bulleted-list"><li style="list-style-type:disc">Contrucion viviendas</li></ul><ul id="f75afb45-5bdb-42c4-98b5-287876ddb1a4" class="bulleted-list"><li style="list-style-type:disc">Viven en Tierra</li></ul></details></li></ul><ul id="0924a747-a825-4c83-a870-8445a6b36ba3" class="toggle"><li><details close=""><summary>Elfos 2</summary><ul id="6b55f7e8-7ed7-452d-8c41-ed3057eb24f0" class="bulleted-list"><li style="list-style-type:disc">Excelente precisión</li></ul><ul id="f7d9928c-a9a9-43c7-bcbe-6139cec3f456" class="bulleted-list"><li style="list-style-type:disc">Armonia con la naturaleza</li></ul><ul id="992e6e6f-a9d3-4fd0-b27d-b56f8a294664" class="bulleted-list"><li style="list-style-type:disc">Viven en Tierra</li></ul></details></li></ul><ul id="1abae6a2-ee26-4366-bfae-ed550a717c3a" class="toggle"><li><details close=""><summary>Enanos 3</summary><ul id="495c535a-3d30-4331-b280-2a5a50688a8e" class="bulleted-list"><li style="list-style-type:disc">Construcción de artefactos</li></ul></details></li></ul><ul id="99124bc6-704a-42e4-94e4-af2811d2a572" class="toggle"><li><details close=""><summary>Hombres bestias 4</summary><ul id="8c814211-0291-4142-bcfe-7d661a2c43dd" class="bulleted-list"><li style="list-style-type:disc">Transmutación animal</li></ul></details></li></ul><ul id="354d9668-69fa-40a7-bbe6-a0c947afc91b" class="toggle"><li><details close=""><summary>Ángeles 5</summary><ul id="947f2616-65fc-40cd-a318-4df4a0812fae" class="bulleted-list"><li style="list-style-type:disc">Bendiciones</li></ul><ul id="53454bb9-13bc-46ca-9bdc-8920b45344c4" class="bulleted-list"><li style="list-style-type:disc">Volar</li></ul><ul id="95d7a44b-ffda-4619-877e-d939cf690b6e" class="bulleted-list"><li style="list-style-type:disc">Viven en cielo</li></ul></details></li></ul><ul id="004e2d9f-71f7-4455-9b6c-e6c982f6256e" class="toggle"><li><details close=""><summary>semidioses 6</summary><ul id="3ca03551-b1fa-498b-b0f9-3d474b3b564f" class="bulleted-list"><li style="list-style-type:disc">Un tipo de magia por semidiós</li></ul><ul id="f40775ef-d3b4-477b-81ae-00428b7dfe87" class="bulleted-list"><li style="list-style-type:disc">Viven en cielo</li></ul></details></li></ul><ul id="5b336667-eaab-4a6a-9b07-e2fe87c246b4" class="toggle"><li><details close=""><summary>yordles 7</summary><ul id="7170ce1b-fa95-4f33-9147-8cb06d1c6cb4" class="bulleted-list"><li style="list-style-type:disc">Magia salvaje</li></ul><ul id="19c58ba4-c8bb-44e9-a284-d59faf14e426" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul><ul id="1f781f70-954b-4771-8971-ac0f32c56aca" class="toggle"><li><details close=""><summary>Golems 8 </summary><ul id="747fc151-cc60-4d1b-9bce-463a7eb21c46" class="bulleted-list"><li style="list-style-type:disc">Golpes masivos</li></ul><ul id="34282b64-f286-49ba-a044-81de5cdf6392" class="bulleted-list"><li style="list-style-type:disc">Inmutativo</li></ul><ul id="1c19f4d6-6f7b-449f-b088-64e117844ea1" class="bulleted-list"><li style="list-style-type:disc">Transmutación de minerales</li></ul><ul id="44387949-2929-4f5c-8863-258f4c0a6128" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul><ul id="8cf37345-a897-4541-b545-35cfe024c58b" class="toggle"><li><details close=""><summary>Hombres Arbol 10</summary><ul id="a6ff7c1d-3635-4c08-a59d-ead85b44a6e7" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul><ul id="5ef7a05e-8238-4973-aee7-94dbf810dc60" class="toggle"><li><details close=""><summary>seres energía 11</summary><ul id="e370253b-519d-4050-9788-4eb29f6991dd" class="bulleted-list"><li style="list-style-type:disc">Tele transportación</li></ul><ul id="58cab6dc-5487-4320-b627-420af17153e5" class="bulleted-list"><li style="list-style-type:disc">electrocutar </li></ul><ul id="9ee6267f-0881-4a5c-85c9-f9c160476826" class="bulleted-list"><li style="list-style-type:disc">Fusión</li></ul><ul id="d1abd6d1-5c47-4cc4-bc0d-04d4ea91e29e" class="bulleted-list"><li style="list-style-type:disc">Viven en Cielo</li></ul></details></li></ul><ul id="fdc7e18a-abc5-4df3-b97e-e3126c9c6aef" class="toggle"><li><details close=""><summary>gigantes 12</summary><ul id="0dee783b-50ef-4d00-ab9e-ced9726b1ab9" class="bulleted-list"><li style="list-style-type:disc">Golpes masivos</li></ul></details></li></ul><ul id="eb368416-5bf1-4b2e-8db0-bd86c243a5d6" class="toggle"><li><details close=""><summary>Ex machine 13</summary><ul id="5fffd065-9095-41cc-b6ed-6a6eab25c8da" class="bulleted-list"><li style="list-style-type:disc">Creación de objetos</li></ul><ul id="a9bb9808-e74d-42ee-a5d1-e2323a555a0e" class="bulleted-list"><li style="list-style-type:disc">Robo de energía</li></ul><ul id="55220c70-fc7d-4541-80c7-7a0f73f7264e" class="bulleted-list"><li style="list-style-type:disc">Viven en cielo</li></ul></details></li></ul><ul id="a182e212-6ae4-4c7a-85a6-a72b49ba6786" class="toggle"><li><details close=""><summary>hombre pájaro 14</summary><ul id="7a7f05a7-b488-4663-b43a-3fdfc45913f4" class="bulleted-list"><li style="list-style-type:disc">Volar</li></ul><ul id="eb5abb53-be5c-4b78-b2fc-3e9527413d98" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul><ul id="90aaa5b2-ee67-4870-ac4d-051b33edec76" class="toggle"><li><details close=""><summary>Hadas 15</summary><ul id="823c0976-0948-4b14-9a8f-acab588d3f9f" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul><ul id="1d4c3569-631b-427d-aa3c-0e16788dcae6" class="toggle"><li><details close=""><summary>Centauros 16</summary><ul id="fdc37e2b-2f1b-4a56-8db1-7c26c22eeb31" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul><ul id="eed640fa-06d1-42c6-9260-b689cac44da0" class="toggle"><li><details close=""><summary>Minotaurios 17</summary><ul id="9f807051-fbe7-475a-85db-af7b02b39a2b" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul></div><div id="5f99e9b1-06ec-4b98-88bb-b0e1698732f4" style="width:50%" class="column"><h3 id="99101fcc-8da9-483b-a805-b520328e4dc7" class="">Bando Legion</h3><ul id="a601e163-5d64-4385-a622-07e3a7458896" class="toggle"><li><details close=""><summary>Trolls 18</summary><ul id="830f5f09-d045-4fe9-b27b-4e16d0b61e57" class="bulleted-list"><li style="list-style-type:disc">transformarse en cualquier raza</li></ul></details></li></ul><ul id="fa750c25-1328-4be1-9b9f-56e7ea3d2ec4" class="toggle"><li><details close=""><summary>Esqueletos 19</summary><ul id="7f57129e-94d7-411f-b7a4-063709be69fa" class="bulleted-list"><li style="list-style-type:disc">Reconstruirse</li></ul><ul id="857c3d0a-da97-491f-982d-6c26df29df42" class="bulleted-list"><li style="list-style-type:disc">Magia oscura</li></ul></details></li></ul><ul id="ab4e0b49-f867-4b7d-855c-61295d3bf150" class="toggle"><li><details close=""><summary>Demonios 20</summary><ul id="12a07f53-1227-4a42-b582-a8e8d1020d93" class="bulleted-list"><li style="list-style-type:disc">Control mental</li></ul><ul id="a31584e7-bb58-43d1-baad-b07845d45724" class="bulleted-list"><li style="list-style-type:disc">Lanzar maldiciones </li></ul><ul id="abfae425-b113-45b2-a2ec-e12a8ea1db10" class="bulleted-list"><li style="list-style-type:disc">Magia carne</li></ul></details></li></ul><ul id="424d5567-10b3-4d29-b8ac-a1a8316b69b8" class="toggle"><li><details close=""><summary>Orcos 21</summary><ul id="e8802333-fff3-47aa-9070-ac5daca225f5" class="bulleted-list"><li style="list-style-type:disc">Domesticacion salvaje</li></ul><ul id="22767c29-19e0-4dbf-8099-337027b6ee7b" class="bulleted-list"><li style="list-style-type:disc"></li></ul></details></li></ul><ul id="a5daaf39-c09a-4c30-8794-0932ebecbde9" class="toggle"><li><details close=""><summary>Slimes 22</summary><ul id="66a6d60f-cd33-4fe0-81c4-70ac62abb76d" class="bulleted-list"><li style="list-style-type:disc">invisibilidad</li></ul><ul id="4efab778-376b-4707-bb42-f1e8f5a0d741" class="bulleted-list"><li style="list-style-type:disc">Lanzar ácido</li></ul><ul id="3e7a8228-8417-4c35-b3ff-412bdea04e13" class="bulleted-list"><li style="list-style-type:disc">Copia de habilidades</li></ul><ul id="d941ea5a-9bfe-490a-b406-3b7a7ba43f81" class="bulleted-list"><li style="list-style-type:disc">Copiado de forma</li></ul></details></li></ul><ul id="3264f0d9-ae06-4f4b-82c0-5a0df1859080" class="toggle"><li><details close=""><summary>Vampiros 23</summary><ul id="9c0f5764-f272-4881-932b-08d3a174e845" class="bulleted-list"><li style="list-style-type:disc">Consumir vida vital</li></ul><ul id="b8f3c1aa-cd14-49c5-b12b-2853a9ee5606" class="bulleted-list"><li style="list-style-type:disc">Regeneración</li></ul><ul id="3425b2a6-8ccb-437e-867b-1bebc7ebc407" class="bulleted-list"><li style="list-style-type:disc">Hipnotizar</li></ul><ul id="2b142a6a-2e66-4646-be29-80b06cd514a3" class="bulleted-list"><li style="list-style-type:disc">Ilucion</li></ul></details></li></ul><ul id="605677fa-5460-4e9e-808a-6396723cd9b8" class="toggle"><li><details close=""><summary>Dragones 24</summary><ul id="318e9cb2-f7de-452c-a0cd-f5ac297a0400" class="bulleted-list"><li style="list-style-type:disc">Escupir fuego</li></ul><ul id="0c88540b-0d06-42d9-9815-a1224b46325c" class="bulleted-list"><li style="list-style-type:disc">Volar</li></ul><ul id="a3ac15c2-beb0-44d7-961f-5ae515e89263" class="bulleted-list"><li style="list-style-type:disc">Magia ancestral</li></ul><ul id="4f5ebc58-4c90-4ae1-85c2-fbfb9652cb9f" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul><ul id="9551bdec-3568-44a8-974d-b114cbfdd0f1" class="toggle"><li><details close=""><summary>Arácnidos 25</summary><ul id="669713a2-0d68-43d3-8080-ee91f28c15d5" class="bulleted-list"><li style="list-style-type:disc">Lanzar telarañas</li></ul><ul id="c46fff5a-effa-4951-8f61-12d24bf8ce4c" class="bulleted-list"><li style="list-style-type:disc">Viven en subtierra</li></ul></details></li></ul><ul id="7f28d23c-d66e-461e-8679-07b2323ee138" class="toggle"><li><details close=""><summary>Nagasairens 26</summary><ul id="1bbf1a8a-b824-47fb-a172-71e4a8837777" class="bulleted-list"><li style="list-style-type:disc">Nadar libremente</li></ul><ul id="3c38ad0c-c443-451d-bebf-78a263b2e07b" class="bulleted-list"><li style="list-style-type:disc">Domesticación marina</li></ul><ul id="1f96f511-145e-48b8-8842-ca0a6fd53c88" class="bulleted-list"><li style="list-style-type:disc">Transmutación de fluidos</li></ul><ul id="3d50c966-b68e-4bee-b322-0db4f2d33f07" class="bulleted-list"><li style="list-style-type:disc">Viven en Agua</li></ul></details></li></ul><ul id="4ef14516-9030-4633-af2c-d56d2bfb49bb" class="toggle"><li><details close=""><summary>hombres de hielo 27</summary><ul id="bca43aad-19bd-4ef2-b91a-d95187ae2198" class="bulleted-list"><li style="list-style-type:disc">Congelar</li></ul><ul id="48e4b81b-95c8-434b-834b-f93af2d23255" class="bulleted-list"><li style="list-style-type:disc">Resistencia al frio</li></ul><ul id="a5a95a57-d490-4a34-b52c-c2b42d7da12a" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul><ul id="5a454862-fa67-434a-a18c-c5eb596384ee" class="toggle"><li><details close=""><summary>Insectoides 28</summary><ul id="7c255ccb-e08f-4567-9b31-e82036d73f1a" class="bulleted-list"><li style="list-style-type:disc">Lanzar ácido</li></ul><ul id="5a4d14d9-79a7-43db-ab6f-398d384771d9" class="bulleted-list"><li style="list-style-type:disc">Gran aguilidad</li></ul><ul id="272fb5f1-65cd-4e26-952a-3f80250143c7" class="bulleted-list"><li style="list-style-type:disc">Resistencia acido</li></ul><ul id="3d55ad41-3ec3-4c83-a294-2b436c13d229" class="bulleted-list"><li style="list-style-type:disc">Viven en subtierra</li></ul></details></li></ul><ul id="645c9828-1660-4805-9987-2915a1ef26ba" class="toggle"><li><details close=""><summary>Reptilianos 29</summary><ul id="995d6370-a0ed-4117-a6a1-bbbdbe4226de" class="bulleted-list"><li style="list-style-type:disc">Supervivencia en pantanos</li></ul><ul id="fce80a56-ffd0-45b9-a896-172d66fa86d8" class="bulleted-list"><li style="list-style-type:disc">Resistencia al veneno</li></ul><ul id="7481ccec-2acb-4d10-9435-4ff730968f4e" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra y subtierra</li></ul></details></li></ul><ul id="170d52ba-89d1-4872-a273-57910fa4d99b" class="toggle"><li><details close=""><summary>Seres de la niebla 30</summary><ul id="a0812f84-3af5-4c1e-aadf-caef8015482e" class="bulleted-list"><li style="list-style-type:disc">Viven en Cielo</li></ul></details></li></ul><ul id="0f468549-6cb5-4f0a-ac69-768f0670bc9a" class="toggle"><li><details close=""><summary>Plantasoides 9</summary><ul id="d98ba19b-94f0-475e-9ef2-4656e0c32c02" class="bulleted-list"><li style="list-style-type:disc">Control de tierra</li></ul><ul id="a8b452ae-6173-42b5-9cdd-5e5d337f6f69" class="bulleted-list"><li style="list-style-type:disc">Crear arboles</li></ul><ul id="683b58ce-7b9a-42ff-90a2-b10004ea459e" class="bulleted-list"><li style="list-style-type:disc">Curacion</li></ul><ul id="bd776482-6d1c-4f43-a386-69f32acfd99f" class="bulleted-list"><li style="list-style-type:disc">Viven en tierra</li></ul></details></li></ul></div></div><h3 id="8f7b7c05-aebc-4111-9431-462f79bd0a57" class="">Sub razas</h3><p id="531100d4-c694-4997-bc84-3f5f5d2b4661" class="">dentro de las razas ya mencionadas existirá una jerarquía en las cuales se estableceran las sub razas</p><p id="5090215b-5574-46f1-b898-41c73a418933" class="">
+</p></div></article></body></html>
