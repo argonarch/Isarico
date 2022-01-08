@@ -1,8 +1,7 @@
-# Introduction
-Isarico is a personal project that focuses on the creation and conceptual development of an MMORPG video game that allows integration of other games such as MOBA or survival, as well as an autonomous ecosystem. The video game will have a fantastic theme with mythical creatures and races from the culture of the entire world.
+# Introduccion
+Isarico es un proyecto personal que se centra en la creación y desarrollo conceptual de un videojuego MMORPG que permite la integración de otros juegos como MOBA o supervivencia, así como un ecosistema autónomo. El videojuego tendrá una temática fantástica con criaturas míticas y razas referentes a la cultura de todo el mundo.
 
-## What do the files contain?
-in the files you will find the definitions, concepts, ideologies, rules that will be applied to the game.
-For now we are taking into account only the conceptual, but it is planned in the future to apply practical ideas for the integration of the conceptually developed.
+## ¿Qué contienen los archivos?
+En los archivos encontrarás las definiciones, conceptos, ideologías y reglas que se aplicarán al juego.
 
-Note: The files are in Spanish, but using the google translation tool there will be no problem (in the future it is planned to create an English version)
+Por ahora estamos tomando en cuenta solo lo conceptual, pero está previsto en el futuro aplicar ideas prácticas para la integración de lo desarrollado conceptualmente.
